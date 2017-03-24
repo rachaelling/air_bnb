@@ -1,22 +1,28 @@
 <%= form_for :session, url: session_path do |form| %>
+
+<!-- email -->
   <div class="text-field">
     <%= form.label :email %>
     <%= form.text_field :email, type: 'email' %>
   </div>
 
+<!-- password -->
   <div class="password-field">
     <%= form.label :password %>
     <%= form.password_field :password %>
   </div>
 
+<!-- sign in button -->
   <div class="submit-field">
     <%= form.submit %>
   </div>
 
   <div class="other-links">
     <% if Clearance.configuration.allow_sign_up? %>
+    <!-- Sign up link -->
       <%= link_to t(".sign_up"), sign_up_path %>
     <% end %>
+    <!-- forgot password link -->
     <%= link_to t(".forgot_password"), new_password_path %>
   </div>
 <% end %>

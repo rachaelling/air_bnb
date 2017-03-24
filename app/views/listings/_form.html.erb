@@ -1,0 +1,37 @@
+<!-- form for new and edit listings  -->
+
+<!-- title -->
+<div class="text-field">
+  <%= form.label :title %>
+  <%= form.text_field :title  %>
+</div>
+
+<!-- location -->
+<div class="text-field">
+  <%= form.label :location %>
+  <%= form.text_field :location %>
+</div>
+
+<!-- description -->
+<div class="text-field">
+  <%= form.label :listing_description %>
+  <%= form.text_area :description %>
+</div>
+
+<!-- available from -->
+<div class="date-field">
+  <%= form.label :available_from %>
+  <%= form.date_field :available_from, type: 'date' %>
+</div>
+
+<!-- available to -->
+<div class="date-field">
+  <%= form.label :available_to %>
+  <%= form.date_field :available_to, type: 'date' %>
+</div>
+
+<!-- capacity -->
+<div class="text-field">
+  <%= form.label :number_of_guests %>
+  <%= form.number_field :capacity, type: 'number'   %>
+</div>

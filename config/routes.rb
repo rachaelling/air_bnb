@@ -8,6 +8,7 @@ resources :users, controller: "clearance/users", only: [:create] do
   resource :password,
     controller: "clearance/passwords",
     only: [:create, :edit, :update]
+
 end
 
 get "/sign_in" => "clearance/sessions#new", as: "sign_in"
@@ -16,5 +17,9 @@ get "/sign_up" => "clearance/users#new", as: "sign_up"
 #*** end of default routes of Clearance
 
 resources :users, controller: "users", only: :show
+resources :listings
+
+#Route that redirects the user from Facebook(the provider) to the app
 get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
 end
