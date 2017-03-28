@@ -7,7 +7,9 @@
 <body>
   <div id="header">
     <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <%= button_to ("Sign Out"), sign_out_path, method: :delete %>
+      <%= link_to ("New Listing"), new_listing_path %>
+      <%= link_to ("My Listings"), listings_path %>
     <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>
@@ -19,6 +21,5 @@
     <% end %>
   </div>
   <%= yield %>
-<%= link_to "Connect With Facebook", "/auth/facebook" %>
 </body>
 </html>

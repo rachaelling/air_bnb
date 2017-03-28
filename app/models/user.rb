@@ -3,17 +3,17 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   has_many :authentications, :dependent => :destroy
+  #ensuring that all of the dependents of authentications gets destroyed as well
+  has_many :listings
+  has_many :reservations
 
-  def self.create_with_auth_and_hash(authentication,auth_hash)
-    create! do |u|
-      #u.first_name = auth_hash["info"]["first_name"]
-      # u.last_name = auth_hash["info"]["last_name"]
-      # u.friendly_name = auth_hash["info"]["name"]
-      u.email = auth_hash["extra"]["raw_info"]["email"]
-      u.password = SecureRandom.hex(6)
-      u.authentications<<(authentication)
-    end
+#create a User object based on the information given by the provider
+  def self.create_with_auth_and_hash(authentication, auth_hash)
+      user = User.create!(name: auth_hash["name"], email: auth_hash["extra"]["raw_info"]["email"])
+      user.authentications << (authentication)
+      return user
   end
+
 
   def fb_token
     x = self.authentications.where(:provider => :facebook).first
@@ -23,6 +23,4 @@ class User < ApplicationRecord
   # def password_optional?
   #   true
   # end
-
-
 end
