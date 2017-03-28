@@ -33,5 +33,11 @@
 <!-- capacity -->
 <div class="text-field">
   <%= form.label :number_of_guests %>
-  <%= form.number_field :capacity, type: 'number'   %>
+  <%= form.number_field :capacity, type: 'number'  %>
+</div>
+
+<!--photos-->
+<div class="text-field">
+  <%= form.label :photos %>
+  <%= form.file_field :photos, multiple: true  %>
 </div>

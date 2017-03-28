@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :listings
   has_many :reservations
 
+# upload profile photo
+  mount_uploader :image, ImageUploader
+
+
 #create a User object based on the information given by the provider
   def self.create_with_auth_and_hash(authentication, auth_hash)
       user = User.create!(name: auth_hash["name"], email: auth_hash["extra"]["raw_info"]["email"])

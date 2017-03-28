@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Bed n' Breakfast</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'application', media:'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  </style>
+  <!-- prevents cross-site request forgery -->
   <%= csrf_meta_tag %>
 </head>
+
 <body>
-  <div id="header">
-    <% if signed_in? -%>
-      <%= button_to ("Sign Out"), sign_out_path, method: :delete %>
-      <%= link_to ("New Listing"), new_listing_path %>
-      <%= link_to ("My Listings"), listings_path %>
+  <div class="underbackground">
+    <div class = "header">
+      <div class="title"><a href="">Bed n' Breakfast</a></div>
+    <% if signed_in? %>
+      <!-- <%= link_to ("New Listing"), new_listing_path %> -->
+      <a href="/listings/new">New Listing</a>
+      <!-- <%= link_to ("All Listings"), listings_path %> -->
+      <a href="/listings">All Listings</a>
+       <!-- <%= button_to ("Sign Out"), sign_out_path, method: :delete %> -->
+      <a href="/sign_out/" data-method = "delete">Sign Out</a>
+      <%= link_to ("Profile"), edit_user_path(current_user) %>
     <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-    <% end -%>
+      <!-- <%= link_to t(".sign_in"), sign_in_path %> -->
+      <a href="/sign_in/">Sign In</a>
+    <% end %>
+    </div>
   </div>
 
   <div id="flash">
@@ -20,6 +44,7 @@
       <div id="flash_<%= key %>"><%=h value %></div>
     <% end %>
   </div>
+
   <%= yield %>
 </body>
 </html>
