@@ -1,8 +1,11 @@
-<h1>Listings#index</h1>
+<h2>All Listings</h2>
 <p>Find me in app/views/listings/index.html.erb</p>
 
 <% @listings.each do |listing| %>
   <%= link_to listing.title, listing_path(listing) %>
-  <%= button_to ("Update"), edit_listing_path(listing) %>
+  <%= button_to ("Update"), edit_listing_path(listing), method: :get %>
   <%= button_to ("Delete"), listing_path(listing), method: :delete %>
 <% end %>
+
+
+<%= paginate @listings %>

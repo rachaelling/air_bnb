@@ -3,7 +3,20 @@
   <%= form.text_field :email, type: 'email' %>
 </div>
 
+<!-- only allow password field on sign in page  -->
+<% unless signed_in? %>
 <div class="password-field">
   <%= form.label :password %>
   <%= form.password_field :password %>
 </div>
+<% end %>
+
+<!-- only allow edit profile picture when signed in (in edit user) -->
+<% if signed_in? %>
+<div>
+  <%= form.label :Your_Profile_Picture%></br>
+  <%= image_tag(@user.image_url) if @user.image? %>
+  <%= form.file_field :image %>
+  <%= form.hidden_field :image_cache %>
+</div>
+<% end %>

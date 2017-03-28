@@ -3,6 +3,7 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
+
   end
 
   def create
@@ -17,7 +18,8 @@ class ListingsController < ApplicationController
   end
 
   def index
-    @listings = current_user.listings
+    # @listings = Listing.all
+    @listings = Listing.order(:title).page params[:page]
   end
 
   def show
@@ -32,7 +34,7 @@ class ListingsController < ApplicationController
     # @listing = Listing.find(params[:id])
     if @listing.update(listing_params)
       flash[:notice] = "Listing Updated!"
-      redirect_to listings_path
+      redirect_to root_path
     else
       flash[:error] = "Error in updating listing"
       render "listings/edit"
@@ -40,15 +42,16 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    # @listing = Listing.find(pa  rams[:id])
+    # @listing = Listing.find(params[:id])
     @listing.destroy
     redirect_to root_path
   end
 
   private
   def listing_params
-    params.require(:listing).permit(:title, :location, :description, :available_from, :available_to, :capacity)
+    params.require(:listing).permit(:title, :location, :description, :available_from, :available_to, :capacity, {photos: []})
   end
+
 
   def find_listing
     @listing = Listing.find(params[:id])

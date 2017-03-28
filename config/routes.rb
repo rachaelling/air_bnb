@@ -16,7 +16,7 @@ delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
 get "/sign_up" => "clearance/users#new", as: "sign_up"
 #*** end of default routes of Clearance
 
-resources :users, controller: "users", only: :show
+resources :users, controller: "users", only: [:show, :edit, :update, :index]
 resources :listings
 
 #Route that redirects the user from Facebook(the provider) to the app
