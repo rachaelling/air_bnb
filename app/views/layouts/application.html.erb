@@ -23,15 +23,15 @@
 <body>
   <div class="underbackground">
     <div class = "header">
-      <div class="title"><a href="">Bed n' Breakfast</a></div>
+      <div class="title"><a href="">Welcome to Air BnB  <%=current_user.id%> </a></div>
     <% if signed_in? %>
       <!-- <%= link_to ("New Listing"), new_listing_path %> -->
+
       <a href="/listings/new">New Listing</a>
-      <!-- <%= link_to ("All Listings"), listings_path %> -->
-      <a href="/listings">All Listings</a>
-       <!-- <%= button_to ("Sign Out"), sign_out_path, method: :delete %> -->
-      <a href="/sign_out/" data-method = "delete">Sign Out</a>
-      <%= link_to ("Profile"), edit_user_path(current_user) %>
+      <%= link_to ("All Listings"), listings_path %>
+      <%= link_to ("Edit Profile"), edit_user_path(current_user) %>
+      <%= link_to ("Trips"), reservation_path(current_user) %>
+      <%= button_to ("Sign Out"), sign_out_path, method: :delete %>
     <% else -%>
       <!-- <%= link_to t(".sign_in"), sign_in_path %> -->
       <a href="/sign_in/">Sign In</a>
