@@ -19,7 +19,14 @@ class ReservationsController < ApplicationController
 
 
   def destroy
-
+  @reservation = Reservation.find(params[:id])
+  # @reservation = current_user.reservations
+   if @reservation.destroy
+   redirect_to reservation_path(current_user)
+   else
+    flash[:errors] = "There was a problem deleting your reservations"
+    redirect_to reservation_path(current_user)
+   end
   end
 
   def reservation_params

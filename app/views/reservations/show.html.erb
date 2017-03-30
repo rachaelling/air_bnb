@@ -13,9 +13,10 @@
         <% @reservations.each do |reservation| %>
         <tr>
           <td><%= link_to reservation.listing.title, reservation.listing %></td>
-          <td><%= reservation.start_date %></td>
-          <td><%= reservation.end_date %></td>
+          <td><%= reservation.start_date.strftime('%d %b %Y') %></td>
+          <td><%= reservation.end_date.strftime('%d %b %Y') %></td>
           <td><%= reservation.num_guests %></td>
+          <td><%= link_to "Cancel Booking", reservation_path(reservation.id), method: :delete %></td>
         </tr>
       </tbody>
     <% end %>
