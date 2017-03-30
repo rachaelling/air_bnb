@@ -1,7 +1,12 @@
 <!-- form to create (new) and update (edit) reservations  -->
 
 <%= form_for [@listing, @reservation] do |f| %>
-<%= f.hidden_field :listing_id, value: @listing.id %>
+  <% if @errors.present? %>
+  <div>
+    <%= @errors %>
+  </div>
+  <% end %>
+<!-- <%= f.hidden_field :listing_id, value: @listing.id %> -->
   <div>
     <%= f.label :num_guests %>
     <%= f.number_field :num_guests  %>
