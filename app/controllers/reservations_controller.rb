@@ -12,6 +12,10 @@ class ReservationsController < ApplicationController
       end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @reservations = @user.reservations
+  end
 
 
   def destroy

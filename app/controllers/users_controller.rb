@@ -1,12 +1,19 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
+  def show
+    @reservations = current_user.reservations 
+  end
+
   def edit
     @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
-    byebug
     if @user.update(user_params)
       flash[:notice] = "Profile Updated!"
       redirect_to root_path
