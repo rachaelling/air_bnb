@@ -5,15 +5,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @reservations = current_user.reservations 
+    @user = current_user
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       flash[:notice] = "Profile Updated!"
       redirect_to root_path
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-   @user = User.find(params[:id])
+   @user = current_user
    @user.destroy
    redirect_to root_path
   end

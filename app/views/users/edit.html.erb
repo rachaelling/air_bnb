@@ -1,7 +1,9 @@
-<h1>Update Profile</h1>
+<h1>Edit Profile</h1>
 <p>Find me in app/views/users/edit.html.erb</p>
 
 <%= form_for @user do |form| %>
   <%= render partial: 'form', object: form %>
   <%= form.submit %>
 <% end %>
+
+<%= button_to ("View Profile"), user_path(current_user), method: :get %>

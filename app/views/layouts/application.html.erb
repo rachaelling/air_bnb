@@ -30,7 +30,7 @@
       <a href="/listings/new">New Listing</a>
       <%= link_to ("All Listings"), listings_path %>
       <%= link_to ("Edit Profile"), edit_user_path(current_user) %>
-      <%= link_to ("Trips"), reservation_path(current_user) %>
+      <%= link_to ("Reservations"), reservation_path(current_user) %>
       <%= button_to ("Sign Out"), sign_out_path, method: :delete %>
     <% else -%>
       <!-- <%= link_to t(".sign_in"), sign_in_path %> -->
