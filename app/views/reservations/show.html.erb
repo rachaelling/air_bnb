@@ -1,0 +1,23 @@
+<div class = "container-fluid">
+  <h1>Your Reservations</h1>
+  <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Num of Guests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= link_to reservation.listing.title, reservation.listing %></td>
+          <td><%= reservation.start_date.strftime('%d %b %Y') %></td>
+          <td><%= reservation.end_date.strftime('%d %b %Y') %></td>
+          <td><%= reservation.num_guests %></td>
+          <td><%= link_to "Cancel Booking", reservation_path(reservation.id), method: :delete %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>

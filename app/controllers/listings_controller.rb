@@ -1,9 +1,12 @@
 class ListingsController < ApplicationController
   before_action :find_listing, only: [:show, :edit, :update, :destroy ]
 
+  def index
+    @listings = Listing.order(:title).page params[:page]
+  end
+
   def new
     @listing = Listing.new
-
   end
 
   def create
@@ -17,13 +20,8 @@ class ListingsController < ApplicationController
     end
   end
 
-  def index
-    # @listings = Listing.all
-    @listings = Listing.order(:title).page params[:page]
-  end
-
   def show
-    #@listings = current_user.listings
+    @reservation = @listing.reservations.new
   end
 
   def edit
@@ -33,10 +31,10 @@ class ListingsController < ApplicationController
   def update
     # @listing = Listing.find(params[:id])
     if @listing.update(listing_params)
-      flash[:notice] = "Listing Updated!"
+      flash[:success] = "Successfully updated the listing!"
       redirect_to root_path
     else
-      flash[:error] = "Error in updating listing"
+      flash[:danger] = "Error in updating listing"
       render "listings/edit"
     end
   end

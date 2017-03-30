@@ -1,16 +1,18 @@
-<h1>Listings#show</h1>
-<p>Find me in app/views/listings/show.html.erb</p>
-
+<h1>Title: <%= @listing.title %></h1>
 <div>
-  <h2>
-  Title:<%= @listing.title %><br>
-  Location: <%= @listing.location %><br>
-  Description: <%= @listing.description %><br>
-  Available From: <%= @listing.available_from %><br>
-  Available To: <%= @listing.available_to %><br>
-</h2>
-</div>
+  Posted By: <%= @listing.user.email %> (<%= @listing.user.id %>)
 
+</div>
+___________________________________________________________________________
+  <p>Location: <%= @listing.location %></p>
+  <p>Description: <%= @listing.description %></p>
+  <p>Max guests: <%= @listing.capacity %></p>
+  <p>Available From: <%= @listing.available_from %></p>
+  <p>Available To: <%= @listing.available_to %></p>
+  <!-- <%= link_to "Edit", edit_listing_path(@listing) %> -->
+  <%= render "reservations/form" %>
+
+<!-- Carousel displaying pictures of listing -->
 <div class="container">
   <br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -48,7 +50,6 @@
     </a>
   </div>
 </div>
-
 
 </body>
 </html>
