@@ -5,6 +5,7 @@ class ReservationsController < ApplicationController
     @reservation = current_user.reservations.new(reservation_params)
     @reservation.listing = @listing
       if @reservation.save
+        ReservationMailer.reservation_email(current_user, User.find(@listing.user_id), @reservation.id).deliver_now
         redirect_to reservation_path(current_user)
       else
         @errors = @reservation.errors.full_messages
