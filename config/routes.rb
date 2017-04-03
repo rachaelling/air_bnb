@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'braintree/new'
+  post 'braintree/checkout'
   root 'welcome#index'
 
 #*** rails g clearance:routes show all these default Clearance routes

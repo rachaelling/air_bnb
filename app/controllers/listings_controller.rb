@@ -12,7 +12,7 @@ class ListingsController < ApplicationController
   def create
     @listing = current_user.listings.new(listing_params)
     if @listing.save
-      flash[:notice] = "Your listing has been created"
+      flash[:success] = "Your listing has been created"
       redirect_to root_path
     else
       flash[:error] = "Error in creating listing"
@@ -34,7 +34,7 @@ class ListingsController < ApplicationController
       flash[:success] = "Successfully updated the listing!"
       redirect_to root_path
     else
-      flash[:danger] = "Error in updating listing"
+      flash[:error] = "Error in updating listing"
       render "listings/edit"
     end
   end
