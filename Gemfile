@@ -74,6 +74,5 @@ gem 'mini_magick'
 
 gem 'fog'
 
-gem 'braintree'
-
-gem 'dotenv-rails'
+gem "letter_opener", :group => :development
+gem 'braintree

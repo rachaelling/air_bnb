@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
   validate :check_overlapping_dates
   validate :check_max_guests
   validate :check_num_guests
-  
+
   # validate start_date should be after today
 
   def check_num_guests
@@ -15,7 +15,7 @@ class Reservation < ApplicationRecord
 
   def check_max_guests
     max_guests = listing.capacity
-    return if num_guests < max_guests
+    return if num_guests <= max_guests
     errors.add(:max_guests, "Max guests number exceeded")
   end
 
