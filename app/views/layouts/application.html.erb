@@ -1,50 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bed n' Breakfast</title>
+  <title>Air BnB</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= javascript_include_tag 'application' %>
-  <%= stylesheet_link_tag 'application', media:'all', 'data-turbolinks-track' => true %>
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 70%;
-      margin: auto;
-  }
-  </style>
-  <!-- prevents cross-site request forgery -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tag %>
 </head>
-
 <body>
-  <div class="underbackground">
-    <div class = "header">
-      <div class="title"><a href="">Welcome to Air BnB  <%=current_user.id%> </a></div>
-    <% if signed_in? %>
-      <!-- <%= link_to ("New Listing"), new_listing_path %> -->
 
-      <a href="/listings/new">New Listing</a>
+  <div class="container-fluid">
+    <div class = "header">
+      <div class="title"><a href="">Welcome to Air BnB </a></div>
+    <% if signed_in? %>
+      <%= link_to ("New Listing"), new_listing_path %>
       <%= link_to ("All Listings"), listings_path %>
       <%= link_to ("Edit Profile"), edit_user_path(current_user) %>
       <%= link_to ("Reservations"), reservation_path(current_user) %>
       <%= button_to ("Sign Out"), sign_out_path, method: :delete %>
     <% else -%>
-      <!-- <%= link_to t(".sign_in"), sign_in_path %> -->
-      <a href="/sign_in/">Sign In</a>
+      <%= link_to t(".sign_in"), sign_in_path %>
     <% end %>
     </div>
   </div>
 
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
-  </div>
+<div id="flash">
+  <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>">
+            <%= value %>
+      </div>
+  <% end %>
+</div>
 
-  <%= yield %>
+<%= yield %>
 </body>
+
 </html>
