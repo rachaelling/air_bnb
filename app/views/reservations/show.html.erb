@@ -7,6 +7,7 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Num of Guests</th>
+          <th>Payment</th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,7 @@
           <td><%= reservation.start_date.strftime('%d %b %Y') %></td>
           <td><%= reservation.end_date.strftime('%d %b %Y') %></td>
           <td><%= reservation.num_guests %></td>
+          <td><%= link_to "Make Payment", braintree_new_path %>
           <td><%= link_to "Cancel Booking", reservation_path(reservation.id), method: :delete %></td>
         </tr>
       </tbody>

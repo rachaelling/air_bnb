@@ -5,9 +5,11 @@ class ReservationsController < ApplicationController
     @reservation = current_user.reservations.new(reservation_params)
     @reservation.listing = @listing
       if @reservation.save
+        flash[:success] = "Reservation completed!"
         redirect_to reservation_path(current_user)
       else
-        @errors = @reservation.errors.full_messages
+        flash[:error]= "There was an error in creating your reservation"
+        # @errors = @reservation.errors.full_messages
         render "listings/show"
       end
   end
@@ -22,9 +24,10 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
   # @reservation = current_user.reservations
    if @reservation.destroy
-   redirect_to reservation_path(current_user)
+     flash[:notice] = "Your booking has been canceled"
+     redirect_to reservation_path(current_user)
    else
-    flash[:errors] = "There was a problem deleting your reservations"
+    flash[:error] = "There was a problem deleting your reservations"
     redirect_to reservation_path(current_user)
    end
   end
