@@ -75,4 +75,7 @@ gem 'mini_magick'
 gem 'fog'
 
 gem "letter_opener", :group => :development
-gem 'braintree
+
+gem 'braintree'
+
+gem 'sidekiq'

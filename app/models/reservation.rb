@@ -4,19 +4,25 @@ class Reservation < ApplicationRecord
   validate :check_overlapping_dates
   validate :check_max_guests
   validate :check_num_guests
-
-  # validate start_date should be after today
+  # validate start_date should be after today(to do!)
 
   def check_num_guests
-    return if num_guests > 0
-    errors.add(:num_guests, "Number of guests cannot be negative")
+    if num_guests > 0
+      return true
+    else
+      errors.add(:num_guests, "Number of guests cannot be negative")
+      return false
     end
   end
 
   def check_max_guests
     max_guests = listing.capacity
-    return if num_guests <= max_guests
-    errors.add(:max_guests, "Max guests number exceeded")
+    if num_guests <= max_guests
+      return true
+    else
+      errors.add(:max_guests, "Max guests number exceeded")
+      return false
+    end
   end
 
   def overlap?(x,y)
@@ -25,9 +31,10 @@ class Reservation < ApplicationRecord
 
   def check_overlapping_dates
     #compare this new booking against existing bookings
-  listing.reservations.each do |old_reservation|
+  self.listing.reservations.each do |old_reservation|
     if overlap?(self, old_reservation)
       return errors.add(:overlapping_dates, "Your reservation dates conflict with existing reservations")
+      end
     end
   end
 
