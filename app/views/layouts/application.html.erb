@@ -32,9 +32,17 @@
 
 <div id="flash">
   <% flash.each do |key, value| %>
+    <% if value.class == Array %>
+      <% value.each do |message| %>
+        <div class="<%= flash_class(key) %>">
+          <p><%= message %></p>
+        </div>
+      <% end %>
+    <% else %>
       <div class="<%= flash_class(key) %>">
-            <%= value %>
+        <p><%= value %></p>
       </div>
+    <% end %>
   <% end %>
 </div>
 

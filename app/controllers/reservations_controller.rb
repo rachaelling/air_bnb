@@ -4,14 +4,15 @@ class ReservationsController < ApplicationController
     @listing = Listing.find(params[:listing_id])
     @reservation = current_user.reservations.new(reservation_params)
     @reservation.listing = @listing
+    @host = 'rachaellhe23@gmail.com'
+        # ReservationMailer.reservation_email(current_user, User.find(@listing.user_id), @reservation.id).deliver_now
       if @reservation.save
-        ReservationMailer.reservation_email(current_user, User.find(@listing.user_id), @reservation.id).deliver_now
+        ReservationJob.perform_now(current_user.email, @host, @reservation.id)
         flash[:success] = "Reservation completed!"
         redirect_to reservation_path(current_user)
       else
-        flash[:error]= "There was an error in creating your reservation"
-        # @errors = @reservation.errors.full_messages
-        render "listings/show"
+        flash[:error]= @reservation.errors.full_messages
+        redirect_to reservation_path(current_user)
       end
   end
 
@@ -25,7 +26,7 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
   # @reservation = current_user.reservations
    if @reservation.destroy
-     flash[:notice] = "Your booking has been canceled"
+     flash[:error] = "Your booking has been canceled"
      redirect_to reservation_path(current_user)
    else
     flash[:error] = "There was a problem deleting your reservations"
